@@ -1,0 +1,14 @@
+* {
+    font-family: "Lemonada";
+}
+
+body{
+    background: whitesmoke;
+    margin: 0px;
+}
+
+.center {
+    display: block;
+    height: 10%;
+    margin-bottom: 10%;
+  }

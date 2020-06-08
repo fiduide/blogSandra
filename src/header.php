@@ -5,6 +5,8 @@ $req = $bdd->query('SELECT * FROM utilisateurs WHERE id = "' . $_SESSION['id'] .
 $req = $req->fetch();
 }
  ?>
+ <script type="text/javascript" src="javascript/javaScript.js"></script>
+ <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -32,8 +34,10 @@ $req = $req->fetch();
             Mon Compte
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <?php if($_SESSION['group'] == "admin"){?>
+            <a class="dropdown-item" href="#">Ajouter un article</a>
+            <a class="dropdown-item" href="#">Supprimer un article</a>
+            <?php } ?>
             <a class="dropdown-item" href="deco.php">Déconnexion</a>
             </div>
         </li>
@@ -61,4 +65,5 @@ $req = $req->fetch();
  a {
      text-decoration: none;
  }
+}
 </style>

@@ -24,17 +24,15 @@ if (isset($_POST['email']) && isset($_POST['mdp'])) {
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style_global.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@600&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
 </head>
 
-<body>
+<body style="background: #e5e5e5">
     <?php
     include "header.php";
     ?>
-    <br><br>
-    <section class="shadow-sm p-3 mb-5 bg-white rounded" style="width: 50%; margin: auto; ">
+
+    <section class="shadow p-3 mb-5 bg-white rounded" style="width: 50%; margin: auto; margin-top: 5em;">
         <form action="connexion.php" method="POST">
             <div class="form-group">
                 <label for="exampleInputEmail1">Adresse mail</label>

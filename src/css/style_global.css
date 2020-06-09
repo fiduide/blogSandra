@@ -2,12 +2,13 @@
     font-family: "Lemonada";
 }
 
-body{
+.body{
     margin: 0px;
+    background: #e5e5e5;
 }
 
 .center {
     display: block;
     height: 10%;
     margin-bottom: 10%;
-  }
+}

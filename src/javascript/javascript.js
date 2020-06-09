@@ -49,7 +49,7 @@ function verif(){
 
     function alertMissingInformation(){
                     return '<div class="alert alert-danger" role="alert">'+
-            '<strong>Veuillez renter toutes les informations demandées</strong>'+
+            '<strong>Veuillez rentrer toutes les informations demandées</strong>'+
            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
                 '<span aria-hidden="true">&times;</span>'+
            '</button>'+
@@ -66,22 +66,30 @@ function verif(){
 }
 }
 
-function succesRegister(){
-    document.getElementById('test').innerHTML =  alertSuccesRegister();
 
-    function alertSuccesRegister(){
-        return '<div class="alert alert-success" role="alert">'+
-        'Vous êtes maintenant inscrit !' +
-      '</div>';
+function verifConnexion(){
+    if(document.getElementById("email").value == "" ){
+        document.getElementById('test').innerHTML =  alertMissingInformation();
+        document.getElementById("email").style.borderColor = "red";
+        return false;
+    }else{
+        document.getElementById("email").style.borderColor = "";
     }
-}
 
-function WrongEmail(email){
-    document.getElementById('test').innerHTML =  alertWrongEmail();
+    if(document.getElementById("mdp").value==""){
+        document.getElementById('test').innerHTML =  alertMissingInformation();
+        document.getElementById("mdp").style.borderColor = "red";
+        return false;
+    }else{
+        document.getElementById("mdp").style.borderColor = "";
+    }
 
-    function alertWrongEmail(){
+    function alertMissingInformation(){
         return '<div class="alert alert-warning" role="alert">'+
-        'L\'email ' + email + ' est déjà utilisé !' +
-      '</div>';
+                '<strong>Veuillez rentrer toutes les informations demandées</strong>'+
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span>'+
+                '</button>'+
+                '</div>';
     }
 }

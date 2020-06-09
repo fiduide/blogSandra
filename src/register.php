@@ -1,5 +1,5 @@
 <?php session_start();
-include "bdd.php";
+include "NoView/bdd.php";
 
 if (!empty($_POST['email']) && !empty($_POST['mdp']) && !empty($_POST['nom']) && !empty($_POST['prenom'])) {
     $email = $_POST['email'];
@@ -35,10 +35,10 @@ if (!empty($_POST['email']) && !empty($_POST['mdp']) && !empty($_POST['nom']) &&
     <title>Inscription</title>
 </head>
 
-<body style="background: #e5e5e5">
+<body class="body">
 
     <?php
-    include "header.php";
+    include "NoView/header.php";
     ?>
 
     <div id="test"></div>

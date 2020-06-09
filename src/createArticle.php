@@ -9,7 +9,7 @@ if($_SESSION['group'] != "admin" || $_SESSION['group'] == ""){
         </div>';
 }else{
     include "NoView/bdd.php";
-    if(!empty($_POST['sujet']) && !empty($_POST['p1'])){
+    if(!empty($_POST['sujet']) && !empty($_POST['categorie'])&& !empty($_POST['p1'])){
         if(!isset($_POST['p2'])){
             $p2 = NULL;
         }
@@ -40,8 +40,8 @@ if($_SESSION['group'] != "admin" || $_SESSION['group'] == ""){
         $nom = $nom->fetch();
 
         $auteur = $nom['prenom'];
-        $req = $bdd->prepare('INSERT INTO articles (sujet, p1, p2, p3, p4, p5, auteur, date_ajout) VALUES(?, ?, ?, ?, ?, ?, ?, CAST(NOW() AS DATE))');
-        $req->execute(array(htmlspecialchars($_POST['sujet']), htmlspecialchars($_POST['p1']),htmlspecialchars($p2),htmlspecialchars($p3),htmlspecialchars($p4),htmlspecialchars($p5), htmlspecialchars($auteur)));
+        $req = $bdd->prepare('INSERT INTO articles (sujet, categorie, p1, p2, p3, p4, p5, auteur, date_ajout) VALUES(?, ?, ?, ?, ?, ?, ?, ?, CAST(NOW() AS DATE))');
+        $req->execute(array(htmlspecialchars($_POST['sujet']), htmlspecialchars($_POST['categorie']),htmlspecialchars($_POST['p1']),htmlspecialchars($p2),htmlspecialchars($p3),htmlspecialchars($p4),htmlspecialchars($p5), htmlspecialchars($auteur)));
         echo '<div class="alert alert-success text-center" style="margin: 0px; role="alert">
         Votre article a été créé avec succès !
       </div>';
@@ -64,6 +64,19 @@ if($_SESSION['group'] != "admin" || $_SESSION['group'] == ""){
             <div class="form-group">
                 <label for="exampleFormControlInput1">Sujet</label>
                 <input type="text" class="form-control" id="sujet" name="sujet" placeholder="Résumé du livre 'titre' écrit par 'auteur du livre' ">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Catégorie</label>
+                <select class="form-control w-25" id="categorie" name="categorie">
+                <option></option>
+                <option>Policier</option>
+                <option>Fantastique</option>
+                <option>Thriller</option>
+                <option>Romantique</option>
+                <option>Horreur</option>
+                <option>Science-fiction</option>
+                <option>Dramatique</option>
+                </select>
             </div>
             <table class="w-100" id="myPara">
                 <tr>

@@ -93,3 +93,13 @@ function verifConnexion(){
                 '</div>';
     }
 }
+
+
+function suppCom() {
+    var reponse = confirm ("Etes vous sur de vouloir supprimer ce commentaire ?");
+    if(reponse == true){
+        return true;
+    }else {
+        return false;
+    }
+}

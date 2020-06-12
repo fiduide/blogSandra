@@ -12,3 +12,22 @@
     height: 10%;
     margin-bottom: 10%;
 }
+.image-ronde{
+    width : 75px; height : 75px;
+    border: none;
+    -moz-border-radius : 75px;
+    -webkit-border-radius : 75px;
+    border-radius : 75px;
+}
+
+.image-ronde2{
+    width : 150px; height : 150px;
+    border: none;
+    -moz-border-radius : 75px;
+    -webkit-border-radius : 75px;
+    border-radius : 75px;
+  }
+
+.input-file {
+    display: none;
+}

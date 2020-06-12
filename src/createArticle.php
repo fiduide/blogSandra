@@ -9,7 +9,7 @@ if($_SESSION['group'] != "admin" || $_SESSION['group'] == ""){
         </div>';
 }else{
     include "NoView/bdd.php";
-    if(!empty($_POST['sujet']) && !empty($_POST['categorie'])&& !empty($_POST['p1'])){
+    if(!empty($_POST['sujet']) && !empty($_POST['categorie'])&& !empty($_POST['titre_livre']) && !empty($_POST['auteur_livre'])&& !empty($_POST['p1'])){
         if(!isset($_POST['p2'])){
             $p2 = NULL;
         }
@@ -36,12 +36,33 @@ if($_SESSION['group'] != "admin" || $_SESSION['group'] == ""){
             $p5= $_POST['p2'];
         }
 
+        if(empty($_FILES["monfichier"]["tmp_name"])){
+            $img = NULL;
+        }else{
+
+        if(is_uploaded_file($_FILES["monfichier"]["tmp_name"])) {
+
+            $repertoireDestination = "img/livre/";
+            $nomDestination = $_POST['titre_livre']."&".$_POST['auteur_livre'].".jpg";
+            
+            if (rename($_FILES["monfichier"]["tmp_name"],
+                           $repertoireDestination.$nomDestination)) {
+                $img = $_POST['titre_livre']."&".$_POST['auteur_livre'];
+            } else {
+                echo "Le déplacement du fichier temporaire a échoué";
+            }
+        } else {
+            echo "Le fichier n'a pas été uploadé (trop gros ?)";
+        }
+    }
+
+
         $nom = $bdd->query('SELECT prenom FROM utilisateurs WHERE id = "' . $_SESSION['id'] . '"');
         $nom = $nom->fetch();
 
         $auteur = $nom['prenom'];
-        $req = $bdd->prepare('INSERT INTO articles (sujet, categorie, p1, p2, p3, p4, p5, auteur, date_ajout) VALUES(?, ?, ?, ?, ?, ?, ?, ?, CAST(NOW() AS DATE))');
-        $req->execute(array(htmlspecialchars($_POST['sujet']), htmlspecialchars($_POST['categorie']),htmlspecialchars($_POST['p1']),htmlspecialchars($p2),htmlspecialchars($p3),htmlspecialchars($p4),htmlspecialchars($p5), htmlspecialchars($auteur)));
+        $req = $bdd->prepare('INSERT INTO articles (sujet, categorie, titre_livre, auteur_livre, p1, p2, p3, p4, p5, auteur, date_ajout, nom_img) VALUES(?, ?, ?, ?, ?, ?, ?, ?,?,?, CAST(NOW() AS DATE), ?)');
+        $req->execute(array(htmlspecialchars($_POST['sujet']), htmlspecialchars($_POST['categorie']),htmlspecialchars($_POST['titre_livre']),htmlspecialchars($_POST['auteur_livre']),htmlspecialchars($_POST['p1']),htmlspecialchars($p2),htmlspecialchars($p3),htmlspecialchars($p4),htmlspecialchars($p5), htmlspecialchars($auteur), $img));
         echo '<div class="alert alert-success text-center" style="margin: 0px; role="alert">
         Votre article a été créé avec succès !
       </div>';
@@ -60,13 +81,13 @@ if($_SESSION['group'] != "admin" || $_SESSION['group'] == ""){
     <div id="test"></div>
 
     <section class="container shadow p-3 mb-5 mt-5 bg-white rounded">
-        <form action="createArticle.php" method="POST">
+        <form enctype="multipart/form-data" action="createArticle.php" method="POST">
             <div class="form-group">
                 <label for="exampleFormControlInput1">Sujet</label>
                 <input type="text" class="form-control" id="sujet" name="sujet" placeholder="Résumé du livre 'titre' écrit par 'auteur du livre' ">
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Catégorie</label>
+            <div class="form-inline mb-3">
+                <label for="exampleFormControlSelect1" class="mr-3">Catégorie</label>
                 <select class="form-control w-25" id="categorie" name="categorie">
                 <option></option>
                 <option>Policier</option>
@@ -77,6 +98,15 @@ if($_SESSION['group'] != "admin" || $_SESSION['group'] == ""){
                 <option>Science-fiction</option>
                 <option>Dramatique</option>
                 </select>
+            </div>
+            <div class="form-inline mt-3 mb-3">
+                <label for="exampleFormControlInput1" class="mr-3">Titre du livre</label>
+                <input type="text" class="form-control mr-3" id="titre_livre" name="titre_livre" placeholder="titre du livre">
+                <label for="exampleFormControlInput1" class="mr-3">Auteur du livre</label>
+                <input type="text" class="form-control" id="auteur_livre" name="auteur_livre" placeholder="Auteur du livre">
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control-file" name="monfichier" id="exampleFormControlFile1">
             </div>
             <table class="w-100" id="myPara">
                 <tr>

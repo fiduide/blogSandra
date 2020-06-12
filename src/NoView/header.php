@@ -38,6 +38,7 @@ include "NoView/bdd.php";
             <a class="dropdown-item" href="createArticle.php">Ajouter un article</a>
             <a class="dropdown-item" href="#">Supprimer un article</a>
             <?php } ?>
+            <a class="dropdown-item" href="monCompte.php?id=<?= $_SESSION['id']?>">Option</a>
             <a class="dropdown-item" href="NoView/deco.php">Déconnexion</a>
             </div>
         </li>

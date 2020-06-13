@@ -37,10 +37,12 @@ session_start();
         <h2 class="text-center text-primary border"><?php echo $a['sujet']; ?></h2>
         <?php
         if($a['nom_img'] != NULL){
-
-        }
             echo '<p style="text-indent: 50px;"><img class="img-article rounded ml-3 mr-5 mt-3" style="float: right;" src="img/livre/'.$a['nom_img'].'.jpg">'.$a['p1'].'
             </p>';
+        }else{
+            echo $a['p1'];
+        }
+            
             if($a['p2'] != ""){
                 echo '<p style="text-indent: 50px;">'.$a['p2'].'</p>';
             }

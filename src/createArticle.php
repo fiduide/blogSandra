@@ -57,10 +57,10 @@ if($_SESSION['group'] != "admin" || $_SESSION['group'] == ""){
     }
 
 
-        $nom = $bdd->query('SELECT prenom FROM utilisateurs WHERE id = "' . $_SESSION['id'] . '"');
+        $nom = $bdd->query('SELECT pseudo FROM utilisateurs WHERE id = "' . $_SESSION['id'] . '"');
         $nom = $nom->fetch();
 
-        $auteur = $nom['prenom'];
+        $auteur = $nom['pseudo'];
         $req = $bdd->prepare('INSERT INTO articles (sujet, categorie, titre_livre, auteur_livre, p1, p2, p3, p4, p5, auteur, date_ajout, nom_img) VALUES(?, ?, ?, ?, ?, ?, ?, ?,?,?, CAST(NOW() AS DATE), ?)');
         $req->execute(array(htmlspecialchars($_POST['sujet']), htmlspecialchars($_POST['categorie']),htmlspecialchars($_POST['titre_livre']),htmlspecialchars($_POST['auteur_livre']),htmlspecialchars($_POST['p1']),htmlspecialchars($p2),htmlspecialchars($p3),htmlspecialchars($p4),htmlspecialchars($p5), htmlspecialchars($auteur), $img));
         echo '<div class="alert alert-success text-center" style="margin: 0px; role="alert">

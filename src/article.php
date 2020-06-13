@@ -42,7 +42,6 @@ session_start();
         }else{
             echo $a['p1'];
         }
-            
             if($a['p2'] != ""){
                 echo '<p style="text-indent: 50px;">'.$a['p2'].'</p>';
             }
@@ -69,8 +68,8 @@ session_start();
     </div>
     <?php } ?>
     <?php while($com = $commentaires->fetch()){
-        $image = 'avatar/'.$com["id_membre"].'.jpg';
-        $image_par_defaut = 'avatar/default.jpg';
+        $image = 'img/avatar/'.$com["id_membre"].'.jpg';
+        $image_par_defaut = 'img/avatar/default.jpg';
 
     ?>
     <div class="media container w-75 mt-4 shadow mb-3 p-3 bg-white rounded">
@@ -84,7 +83,7 @@ session_start();
         }
         ?>
         <div class="media-body ml-3">
-            <p class="card-text"><small class="text-muted"><span style="font-size: 19px;"><?php echo $com['prenom'];?></span><?php echo '<span class="float-right">'.$com['date_ajout'].'</span>' ?></small></p>
+            <p class="card-text"><small class="text-muted"><span style="font-size: 19px;"><?php echo $com['pseudo'];?></span><?php echo '<span class="float-right">'.$com['date_ajout'].'</span>' ?></small></p>
             <p><?php echo $com['commentaire']; ?></p>
             <?php
                 if(isset($_SESSION['id'])){

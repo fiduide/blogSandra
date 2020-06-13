@@ -26,8 +26,21 @@
     -moz-border-radius : 75px;
     -webkit-border-radius : 75px;
     border-radius : 75px;
+}
+
+.image-ronde3{
+    width : 50px; height : 50px;
+    border: none;
+    -moz-border-radius : 75px;
+    -webkit-border-radius : 75px;
+    border-radius : 75px;
   }
 
 .input-file {
     display: none;
+}
+
+
+.center {
+    margin: 0 auto !important; /* I have added the !important attribute just for debugging, you can remove it. */
 }

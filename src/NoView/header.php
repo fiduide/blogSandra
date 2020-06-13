@@ -43,7 +43,18 @@ include "NoView/bdd.php";
 
     </div>
     <?php if(!empty($_SESSION['id'])){?>
-    <p class="nameMenu" style="text-align: right;">Bonjour <?php echo $req['prenom']?></p>
+    <p class="nameMenu" style="text-align: right;">Bonjour <?php echo $req['prenom']?>
+    <?php
+        $image = 'img/avatar/'.$_SESSION['id'].'.jpg';
+        $image_par_defaut = 'img/avatar/default.jpg';
+        if(is_file($image)){
+
+            echo '<img class="image-ronde3 align-self-center ml-2"  src="'.$image.'">';
+
+        }else {
+            echo '<img class="image-ronde3   align-self-center ml-2"  src="'.$image_par_defaut.'">';
+        }
+        ?></p>
     <?php }else{
         echo '<a class="nameMenu" href="connexion.php">Connexion</a>';
     } ?>

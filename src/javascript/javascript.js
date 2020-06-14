@@ -1,4 +1,4 @@
-function verif(){
+function verifRegister(){
     if(document.getElementById("email").value==""){
         document.getElementById('test').innerHTML =  alertMissingInformation();
         document.getElementById("email").style.borderColor = "red";
@@ -22,14 +22,14 @@ function verif(){
         document.getElementById("password").style.borderColor = "";
     }
 
-    if(document.getElementById("passwordConfirm").value==""){
+    if(document.getElementById("mdpConfirm").value==""){
         document.getElementById('test').innerHTML =  alertMissingInformation();
-        document.getElementById("passwordConfirm").style.borderColor = "red";
+        document.getElementById("mdpConfirm").style.borderColor = "red";
         return false;
     }else{
-        document.getElementById("passwordConfirm").style.borderColor = "";
+        document.getElementById("mdpconfirm").style.borderColor = "";
     }
-    
+
     if(document.getElementById("prenom").value==""){
         document.getElementById('test').innerHTML =  alertMissingInformation();
         document.getElementById("prenom").style.borderColor = "red";
@@ -46,12 +46,12 @@ function verif(){
         document.getElementById("nom").style.borderColor = "";
     }
 
-    if(document.getElementById("password").value != document.getElementById("passwordConfirm").value){
+    if(document.getElementById("mdpConfirm").value != document.getElementById("password").value){
         document.getElementById('test').innerHTML =  alertWrongPassword();
-        document.getElementById("passwordConfirm").style.borderColor = "red";
+        document.getElementById("mdpConfirm").style.borderColor = "red";
         return false;
     }else{
-        document.getElementById("passwordConfirm").style.borderColor = "";
+        document.getElementById("mdpConfirm").style.border = "";
     }
 
     function alertMissingInformation(){
@@ -70,7 +70,7 @@ function verif(){
                     '<span aria-hidden="true">&times;</span>'+
                 '</button>'+
                 '</div>';
-}
+    }
 }
 
 
@@ -104,6 +104,15 @@ function verifConnexion(){
 
 function suppCom() {
     var reponse = confirm ("Etes vous sur de vouloir supprimer ce commentaire ?");
+    if(reponse == true){
+        return true;
+    }else {
+        return false;
+    }
+}
+
+function suppArticle() {
+    var reponse = confirm ("Etes vous sur de vouloir supprimer cette article ?");
     if(reponse == true){
         return true;
     }else {

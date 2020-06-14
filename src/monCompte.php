@@ -22,10 +22,10 @@ if(!empty($_POST['nom']) && !empty($_POST['prenom'])&& !empty($_POST['pseudo']) 
     }else{
         $ville = htmlspecialchars($_POST['ville']);
     }
-    if(empty($_POST['CP'])){
-        $CP = NULL;
+    if(empty($_POST['cp'])){
+        $cp = NULL;
     }else{
-        $CP = htmlspecialchars($_POST['CP']);
+        $cp = htmlspecialchars($_POST['cp']);
     }
 
 
@@ -46,8 +46,7 @@ if(!empty($_POST['nom']) && !empty($_POST['prenom'])&& !empty($_POST['pseudo']) 
     }
 
     $req = $bdd->query('UPDATE utilisateurs SET pseudo = "'.htmlspecialchars($_POST['pseudo']).'" , nom = "'. htmlspecialchars($_POST['nom']).'", prenom =  "'. htmlspecialchars($_POST['prenom']).'", mdp =  "'. htmlspecialchars($_POST['mdp']).'", adresse = "'.$adress.'",
-        pays = "'.$pays.'", ville = "'.$ville.'", CP = "'.$CP.'" WHERE id = "'.$_GET['id'].'"');
-
+        pays = "'.$pays.'", ville = "'.$ville.'", CP = "'.$cp.'" WHERE id = "'.$_GET['id'].'" ');
       header("Location: monCompte.php?id=$id");
 
 }
@@ -137,7 +136,7 @@ if(!empty($_POST['nom']) && !empty($_POST['prenom'])&& !empty($_POST['pseudo']) 
         </div>
         <div class="form-group col-md-2">
         <label for="inputZip">Code Postal</label>
-        <input type="text" class="form-control" name="CP" value="<?= ($ma['CP'])?>" id="inputZip">
+        <input type="text" class="form-control" name="cp" value="<?= ($ma['CP'])?>" id="inputZip">
         </div>
     </div>
     <div class="form-group">

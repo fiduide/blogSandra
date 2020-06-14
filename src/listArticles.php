@@ -26,11 +26,19 @@ $img = $a['categorie'];
       <div class="card-body">
         <h5 class="card-title"><?php echo $a['sujet']?></h5>
         <p class="card-text text-secondary"><?php echo $a['p1'] ?></p>
-        <p class="card-text"><small class="text-muted"><?php echo 'Écrit par '.$a['auteur']. ' le ' .$a['date_ajout'];
+        <p class="card-text mt-2"><small class="text-muted"><?php echo 'Écrit par '.$a['auteur']. ' le ' .$a['date_ajout'];
         if($a['nb_commentaires'] == 0 || $a['nb_commentaires'] == 1){
-        echo '<span class="float-right">'.$a['nb_commentaires'].' commentaire</span>'; ?></small></p>
+        echo '<span class="float-right">'.$a['nb_commentaires'].' commentaire'; ?></small>
+        <?php if($_SESSION['group'] == "admin"){ ?>
+          <button type="button" class="btn btn-outline-info ml-3">Modifier</button>
+          <a onclick="return suppArticle()"href="NoView/suppArticle.php?id=<?= ($a['id']) ?>"><button type="button" class="btn btn-outline-danger ml-3">Supprimer</button></a></span>
+        <?php } ?></p>
         <?php }else{
-          echo '<span class="float-right">'.$a['nb_commentaires'].' commentaires</span>'; ?></small></p>
+          echo '<span class="float-right">'.$a['nb_commentaires'].' commentaires</span>'; ?></small>
+          <?php if($_SESSION['group'] == "admin"){ ?>
+          <button type="button" class="btn btn-outline-info ml-3">Modifier</button>
+          <a onclick="return suppArticle()"href="NoView/suppArticle.php?id=<?= ($a['id']) ?>"><button type="button" class="btn btn-outline-danger ml-3">Supprimer</button></a></span>
+        <?php } ?></p>
         <?php } ?>
       </div>
     </div>

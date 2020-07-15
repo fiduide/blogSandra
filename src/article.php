@@ -4,10 +4,9 @@ session_start();
     $id = $_GET['id'];
     if(!empty($_SESSION['id'])){
     $id_membre = $_SESSION['id'];
-    }
 
-    $article = $bdd->query('SELECT * FROM articles WHERE id = "' . $id . '"');
-    $a = $article->fetch();
+
+   
 
     $avis = $bdd->query('SELECT * FROM avis WHERE id_article = "' . $id . '" AND id_membre = "' . $id_membre . '" ');
     $av = $avis->fetch();
@@ -17,8 +16,11 @@ session_start();
 
     $avisR = $bdd->query('SELECT count(avis) AS countAvisR FROM avis WHERE id_article = "' . $id . '" AND id_membre = "' . $id_membre . '" AND avis = "1"');
     $avR = $avisR->fetch();
+    }
+    $article = $bdd->query('SELECT * FROM articles WHERE id = "' . $id . '"');
+    $a = $article->fetch();
 
-    
+
 
     $commentaires = $bdd->query('SELECT * FROM commentaires INNER JOIN utilisateurs ON utilisateurs.id = id_membre WHERE id_article = "' . $id . '" ORDER BY date_ajout ASC');
 

@@ -1,3 +1,28 @@
 .img-article{
     width : 310px; height : 400px;
 }
+
+.pouce{
+    width: 30px; height: 30px;
+    margin-left: 20px;
+
+}
+
+.pouce:hover{
+    animation: pouce 0.5s forwards;
+}
+
+@keyframes pouce {
+
+    0%{
+        transform: translateY(0px);
+    }100%{
+        transform: translateY(-5px);
+    }
+}
+
+.pouce2{
+    width: 30px; height: 30px;
+    margin-left: 20px;
+
+}

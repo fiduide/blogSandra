@@ -9,6 +9,17 @@ session_start();
     $article = $bdd->query('SELECT * FROM articles WHERE id = "' . $id . '"');
     $a = $article->fetch();
 
+    $avis = $bdd->query('SELECT * FROM avis WHERE id_article = "' . $id . '" AND id_membre = "' . $id_membre . '" ');
+    $av = $avis->fetch();
+
+    $avisB = $bdd->query('SELECT count(avis) AS countAvisB FROM avis WHERE id_article = "' . $id . '" AND id_membre = "' . $id_membre . '" AND avis = "0"');
+    $avB = $avisB->fetch();
+
+    $avisR = $bdd->query('SELECT count(avis) AS countAvisR FROM avis WHERE id_article = "' . $id . '" AND id_membre = "' . $id_membre . '" AND avis = "1"');
+    $avR = $avisR->fetch();
+
+    
+
     $commentaires = $bdd->query('SELECT * FROM commentaires INNER JOIN utilisateurs ON utilisateurs.id = id_membre WHERE id_article = "' . $id . '" ORDER BY date_ajout ASC');
 
 
@@ -55,6 +66,28 @@ session_start();
                 echo '<p style="text-indent: 50px;">'.$a['p5'].'</p>';
         }
         ?>
+
+    <?php if($_SESSION['group'] == "admin" || $_SESSION['group'] == "membre"){ ?>
+    <br>
+    <div class=text-right>
+        <?php if($av['avis'] == NULL){?>
+
+        <a href="NoView/addAvisBlue.php?id_membre=<?= ($id_membre) ?>&id_article=<?=($id)?>"><img src="img/pouce.png" class="pouce"></a>
+        <a href="NoView/addAvisRed.php?id_membre=<?= ($id_membre) ?>&id_article=<?=($id)?>"><img src="img/dislike.png" class="pouce"></a>
+
+        <?php }else if($av['avis'] == 0){?>
+
+           <a  href="NoView/addAvisBlue.php?id_membre=<?= ($id_membre) ?>&id_article=<?=($id)?>"> <img src="img/pouceBl.png" class="pouce"></a><?php echo '<span class="ml-1 text-muted">'.$avB['countAvisB'].'</span>';?>
+           <a href="NoView/addAvisRed.php?id_membre=<?= ($id_membre) ?>&id_article=<?=($id)?>"> <img src="img/dislike.png" class="pouce"></a><?php echo '<span class="ml-1 text-muted">'.$avR['countAvisR'].'</span>';?>
+
+        <?php }else if($av['avis'] == 1){ ?>
+
+            <a  href="NoView/addAvisBlue.php?id_membre=<?= ($id_membre) ?>&id_article=<?=($id)?>"><img src="img/pouce.png" class="pouce"></a><?php echo '<span class="ml-1 text-muted">'.$avB['countAvisB'].'</span>';?>
+            <a href="NoView/addAvisRed.php?id_membre=<?= ($id_membre) ?>&id_article=<?=($id)?>"><img src="img/pouceR.png" class="pouce"></a><?php echo '<span class="ml-1 text-muted">'.$avR['countAvisR'].'</span>';?>
+
+        <?php } ?>
+    </div>
+    <?php } ?>
     </div>
     <?php if($_SESSION['group'] == "admin" || $_SESSION['group'] == "membre"){ ?>
     <div class="container w-75 mt-5 shadow p-3 bg-white rounded">
